@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewpoint" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>애들아 들어와봐라</title>
+    <title>django</title>
 </head>
 <body>
 <h1>안녕하세요!</h1>
-<p>김건 바보</p>
-<p>전창 노답</p>
-<P>솔로 천국 커플지옥 커플 서창원 망해라!!</P>
-<p>쟈철공익도 솔직히 저녁근무 너무 꿀임 야간하면 아침근무도 해야댐 ㅡㅡ ㅇㅈ? ㅇㅇㅈ</p>
+<p>하이하이</p>
+<ul>
+{% for post in post_list %}
+    <li>
+    {{ post.id }}
+    {{ post.title }}
+    <small>by{{ post.author }}</small>
+    <small>at{{ post.updated_at }}</small>
+    </li>
+{%  endfor %}
+</ul>
+
+    <ul>
+    <li>안녕안녕</li>
+    <li>헬로헬로</li>
+
+</ul>
 </body>
 </html>

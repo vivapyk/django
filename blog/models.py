@@ -26,5 +26,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True) #최초 생성시간 저장
     updated_at = models.DateTimeField(auto_now = True)  #갱신 때마다 시간 저장
 
+    def __str__(self):
+        return self.title
 
 
