@@ -24,6 +24,7 @@ class Post(models.Model):
     lnglat = models.CharField(max_length=50, blank=True,
                 validators=[lnglat_validator], help_text='경도/위도')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    tag_set = models.ManyToManyField('Tag')
     created_at = models.DateTimeField(auto_now_add=True) #최초 생성시간 저장
     updated_at = models.DateTimeField(auto_now = True)  #갱신 때마다 시간 저장
 
@@ -40,3 +41,14 @@ class Comment(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+
+
