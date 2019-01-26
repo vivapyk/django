@@ -7,6 +7,7 @@ def lnglat_validator(value):
     if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d*)$',value):
         raise ValidationError('Invalid LngLat Type')
 
+
 # Create your models here.
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -16,7 +17,7 @@ class Post(models.Model):
     )
 
     author = models.CharField(max_length=20)
-    title = models.CharField(max_length=100, verbose_name= '제목', # 길이제한 100
+    title = models.CharField(max_length=100, verbose_name='제목',# 길이제한 100
   help_text='포스팅 제목을 입력하세요. 100자 내외')
     content = models.TextField(verbose_name='내용') #길이제한 없음
     tags = models.CharField(max_length=100, blank=True)
@@ -25,6 +26,7 @@ class Post(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True) #최초 생성시간 저장
     updated_at = models.DateTimeField(auto_now = True)  #갱신 때마다 시간 저장
+
     class Meta:
         ordering = ['-id']
 
@@ -32,3 +34,9 @@ class Post(models.Model):
         return self.title
 
 
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.CharField(max_length=20)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
