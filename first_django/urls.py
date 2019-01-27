@@ -14,15 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path
 from django.conf.urls import include, url
 from django.conf import settings
+#from django.views.generic import RedirectView
+
+# def root(request):
+#     return redirect('blog:post_list')
+
+
 urlpatterns = [
+
+    path('', lambda r: redirect('blog:post_list'), name= 'root'),
+    # path('', RedirectView.as_view(pattern_name='blog:post_list')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    url(r'^blog/', include('blog.url')),
-    url(r'^dojo/', include('dojo.url')),
-    path('shop/', include('shop.urls')),
+    path('blog/', include(('blog.url', 'blog'), namespace='blog')),
+    path('dojo/', include(('dojo.url', 'dojo'), namespace='dojo')),
+    path('shop/', include(('shop.urls', 'shop'), namespace='shop')),
 ]
 
 if settings.DEBUG:
