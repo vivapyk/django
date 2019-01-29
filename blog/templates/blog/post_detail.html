@@ -18,9 +18,9 @@
             <small>at {{ comment.updated_at }}</small>
         </li>
     </ul>
-{% endfor %}
+    {% endfor %}
 
     <hr/>
-    <a href="{%  url "blog:post_list" %}" class="btn btn-primary">글 목록</a>
-    <a href="{% url "blog:post_edit" %}" class="btn btn-primary">수정</a>
+    <a href="{% url "blog:post_list" %}" class="btn btn-primary">글 목록</a>
+    <a href="{% url "blog:post_edit" post.id %}" class="btn btn-primary">수정</a>
 {% endblock %}
