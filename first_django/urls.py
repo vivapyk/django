@@ -30,7 +30,7 @@ urlpatterns = [
     # path('', RedirectView.as_view(pattern_name='blog:post_list')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('blog/', include(('blog.url', 'blog'), namespace='blog')),
+    path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
     path('dojo/', include(('dojo.url', 'dojo'), namespace='dojo')),
     path('shop/', include(('shop.urls', 'shop'), namespace='shop')),
 ]
