@@ -41,7 +41,8 @@ def post_new(request):
             #                             content=form.cleaned_data['content'])
             #post.save
 
-            post = Post.objects.create(**form.cleaned_data)
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
             post.save()
             return redirect('/dojo/')
     else:
