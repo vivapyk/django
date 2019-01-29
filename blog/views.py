@@ -1,4 +1,6 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
+
+from blog.forms import PostForm
 from .models import Post
 from django.http import Http404
 # Create your views here.
@@ -24,3 +26,29 @@ def post_detail(request, id):
     return render(request, 'blog/post_detail.html', {
         'post': post,
     })
+
+
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.Post, request.FILES)
+        if form.is_valid():
+            post = form.save()
+            return redirect(post)
+    else:
+        form = PostForm()
+    return render(request, 'blog/post_form.html', {
+            'form': form,
+        })
+
+def post_edit(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        form = PostForm(request.Post, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save()
+            return redirect(post)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_form.html', {
+            'form': form,
+        })
