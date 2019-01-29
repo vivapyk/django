@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 import os
 # Create your views here.
+from dojo.forms import PostForm
+from dojo.models import Post
+
+
 def mysum(request, numbers):
     result = sum(map(lambda s: int(s or 0), numbers.split("/")))
     return HttpResponse(result)
@@ -18,6 +22,34 @@ def post_list1(request):
         <p>{name}</p>
         <p>장고만세</p>
         '''.format(name=name))
+
+
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            # post = Post()
+            # post.title = form.cleaned_data['title']
+            # post.content = form.cleaned_data['content']
+            # post.save()
+
+            # post = Post(title=form.cleaned_data['title'],
+            #             content = form.cleaned_data['content'])
+            # post.save()
+
+            # post= Post.objects.create(title=form.cleaned_data['title'],
+            #                             content=form.cleaned_data['content'])
+            #post.save
+
+            post = Post.objects.create(**form.cleaned_data)
+            post.save()
+            return redirect('/dojo/')
+    else:
+        form = PostForm()
+    return render(request, 'dojo/post_form.html',
+    {
+        'form': form,
+    })
 
 
 def post_list2(request):
