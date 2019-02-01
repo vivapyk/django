@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'bootstrap3',
     'debug_toolbar',
     'django_extensions',
+    'imagekit',
     'accounts',
     'blog',
     'dojo',
     'shop',
+
 ]
 
 MIDDLEWARE = [
