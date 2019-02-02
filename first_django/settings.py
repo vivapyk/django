@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'blog',
     'dojo',
     'shop',
+    'first_django',
 
 ]
 
