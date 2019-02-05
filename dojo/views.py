@@ -89,3 +89,8 @@ def post_list3(request):
 #         response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 #         return response
 
+def  post_detail(request, id):
+    post = get_object_or_404(Post, id=id)
+    return render(request, 'dojo/post_detail.html', {
+        'post':post,
+    })
