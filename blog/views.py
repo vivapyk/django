@@ -7,6 +7,7 @@ from django.http import Http404
 
 
 def post_list(request):
+
     qs = Post.objects.all()
 
     q = request.GET.get('q', '')
