@@ -19,3 +19,4 @@ def signup(request):
     return render(request, 'accounts/signup_form.html', {
         'form': form,
     })
+
