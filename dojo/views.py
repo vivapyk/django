@@ -81,7 +81,7 @@ def post_list3(request):
         'items':['파이썬', '장고', 'Celery', 'Azure', 'AWS'],
     }, json_dumps_params={'ensure_ascii': False})
 
-# def excel_download(reqeust):
+# def excel_download(request):
 #     filepath - os.path.join(settings.BASE_DIR, '')
 #     filename = os.path.basename(filepath)
 #     with open(filepath, 'rb') as f:
@@ -89,8 +89,17 @@ def post_list3(request):
 #         response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 #         return response
 
-def  post_detail(request, id):
-    post = get_object_or_404(Post, id=id)
-    return render(request, 'dojo/post_detail.html', {
-        'post':post,
-    })
+
+def generate_view_fn(model):
+    def view_fn(request, id):
+        instance = get_object_or_404(model, id=id)
+        instance_name = model._meta.model_name
+        template_name = '{}/{}_detail.html'.format(model._meta.app_label, instance_name)
+        return render(request, template_name, {
+            instance_name: instance,
+        })
+    return view_fn
+
+
+post_detail = generate_view_fn(Post)
+
