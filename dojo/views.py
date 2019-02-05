@@ -92,5 +92,5 @@ def post_list3(request):
 #         return response
 
 
-post_detail = DetailView.as_view(model=Post, pk_url_kwarg='id')
+post_detail = DetailView.as_view(model=Post)
 
